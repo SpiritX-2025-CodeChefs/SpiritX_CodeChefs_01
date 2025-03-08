@@ -84,6 +84,9 @@ export default function Register() {
     try {
       const response = await upfetch("/api/register", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(values),
         schema: z.object({
           success: z.boolean(),
@@ -108,6 +111,9 @@ export default function Register() {
     try {
       const response = await upfetch("/api/validate-username", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ username }),
         schema: z.object({
           success: z.boolean(),

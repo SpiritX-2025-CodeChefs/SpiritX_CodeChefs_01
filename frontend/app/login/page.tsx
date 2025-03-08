@@ -50,6 +50,9 @@ export default function Login() {
     try {
       const response = await upfetch("/api/login", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(values),
         schema: z.object({
           success: z.boolean(),
