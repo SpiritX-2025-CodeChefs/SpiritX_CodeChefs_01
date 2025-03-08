@@ -9,20 +9,24 @@ export default function Dash() {
   const [username, setUsername] = useState<string | null>(null)
   useEffect(() => {
     const fetchData = async () => {
-      const response = await upfetch(`/api/validate-session`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        schema: z.object({
-          success: z.boolean(),
-          username: z.string(),
-        }),
-      })
-      if (response.success) {
-        setUsername(response.username)
-      } else {
+      try {
+        const response = await upfetch(`/api/validate-session`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          schema: z.object({
+            success: z.boolean(),
+            username: z.string(),
+          }),
+        })
+        if (response.success) {
+          setUsername(response.username)
+        } else {
+          window.location.href = "/login"
+        }
+      } catch {
         window.location.href = "/login"
       }
     }
