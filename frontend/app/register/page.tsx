@@ -97,7 +97,7 @@ export default function Register() {
         setError(null)
         setShowSuccessDialog(true)
         setTimeout(() => {
-          window.location.href = "/dash"
+          window.location.href = "/login"
         }, 2000)
       } else {
         setError(response.message)
