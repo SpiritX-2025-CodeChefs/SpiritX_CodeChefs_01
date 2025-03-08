@@ -19,18 +19,18 @@ class MongoDBService(_BaseDB):
         if self.client:
             self.client.close()
 
-    async def insert_one(self, collection: str, document: dict):
+    async def insert_one(self, collection: str, document: dict) -> str:
         result = await self.db[collection].insert_one(document)
         return str(result.inserted_id)
 
     async def find_one(self, collection: str, query: dict):
         return await self.db[collection].find_one(query)
 
-    async def update_one(self, collection: str, query: dict, update: dict):
+    async def update_one(self, collection: str, query: dict, update: dict) -> bool:
         result = await self.db[collection].update_one(query, {"$set": update})
         return result.modified_count > 0
 
-    async def delete_one(self, collection: str, query: dict):
+    async def delete_one(self, collection: str, query: dict) -> bool:
         result = await self.db[collection].delete_one(query)
         return result.deleted_count > 0
 

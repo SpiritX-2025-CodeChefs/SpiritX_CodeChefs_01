@@ -3,6 +3,7 @@ from typing import Optional
 import secrets
 from passlib.context import CryptContext
 from datetime import datetime
+from bson.objectid import ObjectId
 
 from .models import (
     UserCredentials,
@@ -88,29 +89,29 @@ async def login(
 @router.post("/validate-session", response_model=SessionValidationResponse)
 async def validate_session(
     response: Response,
-    session: Optional[str] = Cookie(None),
+    session: str = Cookie(),
     db: MongoDBService = Depends(get_db_service),
 ):
     if not session:
         response.delete_cookie(key="session")
-        return SessionValidationResponse(success=False)
+        return SessionValidationResponse(success=False, username=str(session))
 
     session_data = await db.find_session(session)
     if not session_data:
         response.delete_cookie(key="session")
-        return SessionValidationResponse(success=False)
+        return SessionValidationResponse(success=False, username="not session 2")
 
     # Check if session has expired
     if session_data["expiry"] < datetime.utcnow():
         await db.delete_session(session)
         response.delete_cookie(key="session")
-        return SessionValidationResponse(success=False)
+        return SessionValidationResponse(success=False, username="not session 3")
 
     # Get user data
-    user = await db.find_one("userTable", {"_id": session_data["userId"]})
+    user = await db.find_one("userTable", {"_id": ObjectId(session_data["userId"])})
     if not user:
         response.delete_cookie(key="session")
-        return SessionValidationResponse(success=False)
+        return SessionValidationResponse(success=False, username="not session 4")
 
     return SessionValidationResponse(success=True, username=user["username"])
 
