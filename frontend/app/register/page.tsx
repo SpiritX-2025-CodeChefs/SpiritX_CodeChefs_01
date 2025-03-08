@@ -32,9 +32,6 @@ const formSchema = z.object({
     message: "Username must be at least 8 characters.",
   }),
   password: z.string()
-    .min(8, {
-      message: "Password must be at least 8 characters.",
-    })
     .regex(/[A-Z]/, {
       message: "Password must contain at least one uppercase letter.",
     })
@@ -135,7 +132,7 @@ export default function Register() {
   return (
     <>
       <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md dark:bg-zinc-900">
           <h1 className="text-3xl font-bold mb-8 text-center">Register</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
@@ -146,7 +143,7 @@ export default function Register() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <div className="relative flex items-center">
+                      <div className="relative flex items-center dark:text-white">
                         <User className="absolute left-3 text-gray-500" size={20} />
                         <Input
                           {...field}
@@ -168,7 +165,7 @@ export default function Register() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <div className="relative flex items-center">
+                      <div className="relative flex items-center dark:text-white">
                         <Lock className="absolute left-3 text-gray-500" size={20} />
                         <Input
                           {...field}
@@ -185,7 +182,7 @@ export default function Register() {
                   </FormItem>
                 )}
               />
-              <div className="w-full bg-gray-200 h-2 rounded mt-2">
+              <div className="w-full bg-gray-200 h-2 rounded mt-2 dark:bg-zinc-800">
                 <div
                   className={cn("h-2 rounded transition-all", getStrengthColor())}
                   style={{ width: `${strength}%` }}
@@ -199,7 +196,7 @@ export default function Register() {
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
                       <div className="relative flex items-center">
-                        <Lock className="absolute left-3 text-gray-500" size={20} />
+                        <Lock className="absolute left-3 text-gray-500 dark:text-white" size={20} />
                         <Input {...field} type="password" className="pl-10 max-w-md w-full" />
                       </div>
                     </FormControl>
