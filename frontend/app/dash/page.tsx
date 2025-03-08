@@ -51,7 +51,7 @@ export default function Dash() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md dark:bg-zinc-900">
         <Spinner />
       </div>
     </div>
