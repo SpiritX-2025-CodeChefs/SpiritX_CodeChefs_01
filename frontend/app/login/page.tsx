@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -45,6 +45,32 @@ export default function Login() {
     mode: "all",
     reValidateMode: "onChange"
   })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await upfetch(`/api/validate-session`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          schema: z.object({
+            success: z.boolean(),
+            username: z.string().nullable(),
+          }),
+        })
+        if (response.success) {
+          window.location.href = "/dash"
+        } else {
+          return;
+        }
+      } catch {
+        window.location.href = "/login"
+      }
+    }
+    fetchData()
+  }, [])
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
