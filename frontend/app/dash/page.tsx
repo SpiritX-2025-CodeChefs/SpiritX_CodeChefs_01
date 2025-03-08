@@ -19,7 +19,7 @@ export default function Dash() {
           credentials: "include",
           schema: z.object({
             success: z.boolean(),
-            username: z.string(),
+            username: z.string().nullable(),
           }),
         })
         if (response.success) {

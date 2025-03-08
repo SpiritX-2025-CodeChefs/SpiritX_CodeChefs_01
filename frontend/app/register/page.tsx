@@ -90,7 +90,7 @@ export default function Register() {
         body: JSON.stringify(values),
         schema: z.object({
           success: z.boolean(),
-          message: z.string(),
+          message: z.string().nullable(),
         }),
       })
       if (response.success) {

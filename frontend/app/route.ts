@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
       credentials: "include",
       schema: z.object({
         success: z.boolean(),
-        username: z.string(),
+        username: z.string().nullable(),
       }),
     })
     if (response.success) {
