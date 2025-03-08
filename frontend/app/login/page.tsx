@@ -112,6 +112,9 @@ export default function Login() {
               <Button type="submit" className="w-full max-w-md" disabled={(!form.formState.isValid || form.formState.isSubmitting)}>
                 Submit
               </Button>
+              <p className="text-center">
+                Don't have an account? <a href="/register" className="text-blue-500">Register here</a>
+              </p>
             </form>
           </Form>
         </div>

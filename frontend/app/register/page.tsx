@@ -211,6 +211,9 @@ export default function Register() {
               <Button type="submit" className="w-full max-w-md" disabled={(!form.formState.isValid || form.formState.isSubmitting)}>
                 Register
               </Button>
+              <p className="text-center">
+                Already have an account? <a href="/login" className="text-blue-500">Login here</a>
+              </p>
             </form>
           </Form>
         </div>
