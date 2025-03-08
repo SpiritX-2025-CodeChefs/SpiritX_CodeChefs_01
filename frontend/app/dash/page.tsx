@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner"
 import { upfetch } from "@/lib/upfetch"
 import { useEffect, useState } from "react"
@@ -33,11 +34,16 @@ export default function Dash() {
     fetchData()
   }, [])
 
+  const handleLogout = () => {
+    window.location.href = "/logout"
+  }
+
   if (username) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md dark:bg-zinc-900">
-          <h1 className="text-3xl font-bold mb-8 text-center">Hello, {username}</h1>
+          <h1 className="text-3xl font-bold mb-8 text-center">"Hello, {username}"</h1>
+          <Button onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     )
